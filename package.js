@@ -14,19 +14,29 @@ Package.onUse(function(api) {
     api.versionsFrom('1.2.1');
 
     // packages
+    api.use('underscore@1.0.0');
+    api.use('blaze-html-templates', 'client');
+    api.use('tap:i18n@1.7.0');
+    api.use('fourseven:scss@3.2.0', 'client');
 
     //exports
     api.export('ckUtils');   // package namespace
 
     // styles
+    api.addFiles('styles/loading.scss', 'client');
 
     // templates
+    api.addFiles('templates/loading.html', 'client');
+
+    // i18n
+    api.addFiles('i18n/it.i18n.json');
+    api.addFiles('i18n/en.i18n.json');
     
     // libraries
     api.addFiles('namespace.js');
     api.addFiles('lib/commonUtilities.js', 'client');
 
-    // i18n
+    api.addFiles('helpers/generalHelpers.js', 'client');
 
 });
 
