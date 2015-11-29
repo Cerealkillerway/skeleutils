@@ -28,6 +28,20 @@ UI.registerHelper('currentLang', function() {
     return FlowRouter.getQueryParam("lang");
 });
 
+// get a lang nested attribute
+UI.registerHelper('langAttribute', function(data, attribute, lang) {
+    switch (lang) {
+        case 'param':
+        return data[FlowRouter.getParam('itemLang')][attribute];
+
+        case 'queryParam':
+        return data[FlowRouter.getQueryParam('lang')][attribute];
+
+        default:
+        return data[lang][attribute];
+    }
+});
+
 // outputs a link with currentLang queryParam
 UI.registerHelper('currentLangLink', function(link) {
     var langQuery = "?lang=" + FlowRouter.getQueryParam("lang");
@@ -56,7 +70,6 @@ UI.registerHelper('display', function(context, options) {
 
         case 'connectionStatus':
             return TAPi18n.__(Meteor.status().status + '_lbl');
-            break;
     }
 });
 
