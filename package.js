@@ -14,6 +14,7 @@ Package.onUse(function(api) {
     api.versionsFrom('1.2.1');
 
     // packages
+    api.use('jquery', 'client');
     api.use('underscore@1.0.0');
     api.use('blaze-html-templates', 'client');
     api.use('tap:i18n@1.7.0');
