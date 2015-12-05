@@ -37,6 +37,9 @@ UI.registerHelper('langAttribute', function(data, attribute, lang) {
         case 'queryParam':
         return data[FlowRouter.getQueryParam('lang')][attribute];
 
+        case 'skeletorDefault':
+        return data[Skeletor.configuration.lang.default][attribute];
+
         default:
         return data[lang][attribute];
     }
