@@ -25,11 +25,15 @@ UI.registerHelper('test', function(value1, value2) {
 
 // outputs the currentLang session variable
 UI.registerHelper('currentLang', function() {
-    return FlowRouter.getQueryParam("lang");
+    return FlowRouter.getParam("itemLang");
 });
 
 // get a lang nested attribute
 UI.registerHelper('langAttribute', function(data, attribute, lang) {
+    if (!lang) {
+        lang  = FlowRouter.getParam('itemLang');
+    }
+
     switch (lang) {
         case 'param':
         return data[FlowRouter.getParam('itemLang')][attribute];
