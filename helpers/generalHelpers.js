@@ -36,16 +36,16 @@ UI.registerHelper('langAttribute', function(data, attribute, lang) {
 
     switch (lang) {
         case 'param':
-        return data[FlowRouter.getParam('itemLang')][attribute];
+        return data[FlowRouter.getParam('itemLang') + '---' + attribute];
 
         case 'queryParam':
-        return data[FlowRouter.getQueryParam('lang')][attribute];
+        return data[FlowRouter.getQueryParam('lang') + '---' + attribute];
 
         case 'skeletorDefault':
-        return data[Skeletor.configuration.lang.default][attribute];
+        return data[Skeletor.configuration.lang.default + '---' + attribute];
 
         default:
-        return data[lang][attribute];
+        return data[lang + '---' + attribute];
     }
 });
 
