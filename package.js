@@ -1,5 +1,5 @@
 Package.describe({
-    name: 'cerealkiller:utils',
+    name: 'cerealkiller:skeleutils',
     version: '1.0.0',
     // Brief, one-line summary of the package.
     summary: 'utilities and common functions',
