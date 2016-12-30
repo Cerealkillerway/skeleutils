@@ -19,7 +19,7 @@ Package.onUse(function(api) {
     api.use('fourseven:scss@3.2.0', 'client');
 
     //exports
-    api.export('ckUtils');   // package namespace
+    api.export('skeleUtils');   // package namespace
 
     // styles
     api.addFiles('styles/loading.scss', 'client');
@@ -41,8 +41,8 @@ Package.onUse(function(api) {
 
 Package.onTest(function(api) {
     api.use('tinytest');
-    api.use('cerealkiller:ckutils');
-    api.addFiles('ckutils-tests.js');
+    api.use('cerealkiller:skeleutils');
+    api.addFiles('skeleUtils-tests.js');
 });
 
 

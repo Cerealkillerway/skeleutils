@@ -1,3 +1,3 @@
-ckUtils = {
+skeleUtils = {
     globalUtilities: {}
 };
