@@ -1,8 +1,7 @@
 // General spacebar helpers
-// ==========================================================================================
 
 // get global configuration object
-var configuration = Meteor.settings.public.configuration;
+let configuration = Meteor.settings.public.configuration;
 
 // console log
 UI.registerHelper('log', function(context, options) {
@@ -25,7 +24,7 @@ UI.registerHelper('test', function(value1, value2) {
 
 // outputs the currentLang session variable
 UI.registerHelper('currentLang', function() {
-    return FlowRouter.getParam("itemLang");
+    return FlowRouter.getParam('itemLang');
 });
 
 // get a lang nested attribute
@@ -51,7 +50,8 @@ UI.registerHelper('langAttribute', function(data, attribute, lang) {
 
 // outputs a link with currentLang queryParam
 UI.registerHelper('currentLangLink', function(link) {
-    var langQuery = "?lang=" + FlowRouter.getQueryParam("lang");
+    let langQuery = '?lang=' + FlowRouter.getQueryParam('lang');
+
     if (link) {
         return link + langQuery;
     }
@@ -60,8 +60,8 @@ UI.registerHelper('currentLangLink', function(link) {
 
 // outputs attribute from configuration object
 UI.registerHelper('conf', function(context, options) {
-    var pathShards = context.split('.');
-    var result = configuration;
+    let pathShards = context.split('.');
+    let result = configuration;
 
     pathShards.forEach(function(shard, index) {
         result = result[shard];
@@ -87,9 +87,9 @@ UI.registerHelper('stripHtml', function(context, truncate) {
 });
 
 // remove HTML markup from lang dependant attribute
-UI.registerHelper("stripHtmlLang", function(context, attribute, truncate) {
-    var lang = FlowRouter.getQueryParam("lang");
-    var result;
+UI.registerHelper('stripHtmlLang', function(context, attribute, truncate) {
+    let lang = FlowRouter.getQueryParam('lang');
+    let result;
 
     if (context && context[lang]) {
         result = context[lang][attribute].replace(/<(?:.|\n)*?>/gm, '');
