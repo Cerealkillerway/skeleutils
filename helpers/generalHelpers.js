@@ -120,6 +120,7 @@ Template.registerHelper('checkPermissions', function(permissionType) {
 
     if (currentRoles) {
         currentRoles = currentRoles.fetch();
+
         let isAllowed = _.find(currentRoles, function(role) {
             return role[permissionType];
         });
