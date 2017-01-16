@@ -4,18 +4,18 @@
 let configuration = Meteor.settings.public.configuration;
 
 // console log
-UI.registerHelper('log', function(context, options) {
+Template.registerHelper('log', function(context, options) {
     console.log(context);
 });
 
 // check if debug is enable
-UI.registerHelper('debug', function(context, options) {
+Template.registerHelper('debug', function(context, options) {
     if (Skeletor.configuration.debug) return true;
     return false;
 });
 
 // checks if two given values are equal
-UI.registerHelper('test', function(value1, value2) {
+Template.registerHelper('test', function(value1, value2) {
     if (value1 === value2) {
         return true;
     }
@@ -23,12 +23,12 @@ UI.registerHelper('test', function(value1, value2) {
 });
 
 // outputs the currentLang session variable
-UI.registerHelper('currentLang', function() {
+Template.registerHelper('currentLang', function() {
     return FlowRouter.getParam('itemLang');
 });
 
 // get a lang nested attribute
-UI.registerHelper('langAttribute', function(data, attribute, lang) {
+Template.registerHelper('langAttribute', function(data, attribute, lang) {
     if (!lang) {
         lang  = FlowRouter.getParam('itemLang');
     }
@@ -49,7 +49,7 @@ UI.registerHelper('langAttribute', function(data, attribute, lang) {
 });
 
 // outputs a link with currentLang queryParam
-UI.registerHelper('currentLangLink', function(link) {
+Template.registerHelper('currentLangLink', function(link) {
     let langQuery = '?lang=' + FlowRouter.getQueryParam('lang');
 
     if (link) {
@@ -59,7 +59,7 @@ UI.registerHelper('currentLangLink', function(link) {
 });
 
 // outputs attribute from configuration object
-UI.registerHelper('conf', function(context, options) {
+Template.registerHelper('conf', function(context, options) {
     let pathShards = context.split('.');
     let result = configuration;
 
@@ -70,7 +70,7 @@ UI.registerHelper('conf', function(context, options) {
 });
 
 // outputs special variables
-UI.registerHelper('display', function(context, options) {
+Template.registerHelper('display', function(context, options) {
     switch (context) {
         case 'currentYear':
             return moment().format('YYYY');
@@ -82,12 +82,12 @@ UI.registerHelper('display', function(context, options) {
 
 
 // remove HTML markup
-UI.registerHelper('stripHtml', function(context, truncate) {
+Template.registerHelper('stripHtml', function(context, truncate) {
     if (context) return context.replace(/<(?:.|\n)*?>/gm, '');
 });
 
 // remove HTML markup from lang dependant attribute
-UI.registerHelper('stripHtmlLang', function(context, attribute, truncate) {
+Template.registerHelper('stripHtmlLang', function(context, attribute, truncate) {
     let lang = FlowRouter.getQueryParam('lang');
     let result;
 
@@ -107,9 +107,27 @@ UI.registerHelper('stripHtmlLang', function(context, attribute, truncate) {
 });
 
 // check if supplied username belongs to current logged user
-UI.registerHelper('isMe', function(username, options) {
+Template.registerHelper('isMe', function(username, options) {
     if (username === Meteor.user().username) {
         return true;
     }
     else return false;
+});
+
+// ACL helper (checks if current user is authorized for a specific permission type)
+Template.registerHelper('checkPermissions', function(permissionType) {
+    let currentRoles = Skeletor.currentUserRoles.get();
+
+    if (currentRoles) {
+        currentRoles = currentRoles.fetch();
+        let isAllowed = _.find(currentRoles, function(role) {
+            return role[permissionType];
+        });
+
+        if (isAllowed !== undefined) {
+            return true;
+        }
+        return false;
+    }
+    return false;
 });
