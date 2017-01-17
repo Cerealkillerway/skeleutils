@@ -36,6 +36,7 @@ Package.onUse(function(api) {
     api.addFiles('lib/commonUtilities.js', 'client');
 
     api.addFiles('helpers/generalHelpers.js', 'client');
+    api.addFiles('helpers/listHelpers.js', 'client');
 
 });
 

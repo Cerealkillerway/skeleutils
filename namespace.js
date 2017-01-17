@@ -1,4 +1,5 @@
 skeleUtils = {
     globalUtilities: {},
-    globalVariables: {}
+    globalVariables: {},
+    globalHelpers: {}
 };
