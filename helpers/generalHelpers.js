@@ -4,8 +4,18 @@
 let configuration = Meteor.settings.public.configuration;
 
 // console log
-Template.registerHelper('log', function(context, options) {
+Template.registerHelper('skeleLog', function(context, options) {
     console.log(context);
+});
+
+// console trace
+Template.registerHelper('skeleTrace', function(context, options) {
+    console.trace(context);
+});
+
+// outputs the defaultLang
+Template.registerHelper('defaultLang', function() {
+    return Skeletor.configuration.lang.default;
 });
 
 // check if debug is enable
