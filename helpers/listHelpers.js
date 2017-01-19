@@ -182,47 +182,51 @@ skeleUtils.globalHelpers.skelelistGeneralHelpers = {
         }
     },
     paginate: function(data) {
-        let schema = data.schema;
-        let listSchema = schema.__listView;
-        let options = listSchema.options;
-        let sort = listSchema.sort;
-        let collection = schema.__collection;
-        let findOptions = {};
-        let list;
+        if (!data.list) {
+            let schema = data.schema;
+            let listSchema = schema.__listView;
+            let options = listSchema.options;
+            let sort = listSchema.sort;
+            let collection = schema.__collection;
+            let findOptions = {};
+            let list;
 
-        // build sort object managing lang dependant attributes
-        if (sort) {
-            findOptions.sort = {};
+            // build sort object managing lang dependant attributes
+            if (sort) {
+                findOptions.sort = {};
 
-            _.keys(sort).forEach(function(sortOption, index) {
-                let fieldSchema = $.grep(schema.fields, function(field){
-                    return field.name == sortOption;
+                _.keys(sort).forEach(function(sortOption, index) {
+                    let fieldSchema = $.grep(schema.fields, function(field){
+                        return field.name == sortOption;
+                    });
+
+                    if (fieldSchema[0].i18n === undefined) {
+                        findOptions.sort[FlowRouter.getParam('itemLang') + '---' + sortOption] = sort[sortOption];
+                    }
+                    else {
+                        findOptions.sort[sortOption] = sort[sortOption];
+                    }
                 });
+            }
 
-                if (fieldSchema[0].i18n === undefined) {
-                    findOptions.sort[FlowRouter.getParam('itemLang') + '---' + sortOption] = sort[sortOption];
-                }
-                else {
-                    findOptions.sort[sortOption] = sort[sortOption];
-                }
-            });
+            // get paginated data
+            if (options && options.pagination) {
+                let currentPage = FlowRouter.getQueryParam('page');
+                let skip = parseInt(currentPage - 1) * options.itemsPerPage;
+
+                findOptions.limit = options.itemsPerPage;
+                findOptions.skip = skip;
+                list = Skeletor.Data[collection].find({}, findOptions);
+            }
+            // get all data
+            else {
+                list = Skeletor.Data[collection].find({}, findOptions);
+            }
+
+            return list;
         }
 
-        // get paginated data
-        if (options && options.pagination) {
-            let currentPage = FlowRouter.getQueryParam('page');
-            let skip = parseInt(currentPage - 1) * options.itemsPerPage;
-
-            findOptions.limit = options.itemsPerPage;
-            findOptions.skip = skip;
-            list = Skeletor.Data[collection].find({}, findOptions);
-        }
-        // get all data
-        else {
-            list = Skeletor.Data[collection].find({}, findOptions);
-        }
-
-        return list;
+        return data.list;
     },
     isPaginated: function(data) {
         let options = data.schema.__listView.options;

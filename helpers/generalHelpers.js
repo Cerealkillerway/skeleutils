@@ -38,7 +38,7 @@ Template.registerHelper('currentLang', function() {
 });
 
 // get a lang nested attribute
-Template.registerHelper('langAttribute', function(data, attribute, lang) {
+Template.registerHelper('skeleLangAttribute', function(data, attribute, lang) {
     if (!lang) {
         lang  = FlowRouter.getParam('itemLang');
     }
@@ -59,7 +59,7 @@ Template.registerHelper('langAttribute', function(data, attribute, lang) {
 });
 
 // outputs a link with currentLang queryParam
-Template.registerHelper('currentLangLink', function(link) {
+Template.registerHelper('skeleCurrentLangLink', function(link) {
     let langQuery = '?lang=' + FlowRouter.getQueryParam('lang');
 
     if (link) {
@@ -124,21 +124,22 @@ Template.registerHelper('isMe', function(username, options) {
     else return false;
 });
 
-// ACL helper (checks if current user is authorized for a specific permission type)
-Template.registerHelper('checkPermissions', function(permissionType) {
-    let currentRoles = Skeletor.currentUserRoles.get();
+// check permissions
+Template.registerHelper('skeleCheckPermissions', function(permissionType, failCallback) {
+    let isAllowed = skeleUtils.globalUtilities.checkPermissions(permissionType);
 
-    if (currentRoles) {
-        currentRoles = currentRoles.fetch();
+    return isAllowed;
+});
 
-        let isAllowed = _.find(currentRoles, function(role) {
-            return role[permissionType];
-        });
-
-        if (isAllowed !== undefined) {
-            return true;
-        }
-        return false;
+// check if skeletor' subscriptions are Ready
+Template.registerHelper('skeleSubsReady', function(subscription) {
+    // if particular subscription state is requested, look for a reactive var
+    // with name subscription + 'Ready'
+    if (subscription) {
+        return Template.instance()[subscription + 'Ready'].get();
     }
-    return false;
+    // otherwise return standard skeleSubsReady reactive var
+    else {
+        return Template.instance().skeleSubsReady.get();
+    }
 });

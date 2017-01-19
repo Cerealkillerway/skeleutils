@@ -34,6 +34,7 @@ Package.onUse(function(api) {
     // libraries
     api.addFiles('namespace.js');
     api.addFiles('lib/commonUtilities.js', 'client');
+    api.addFiles('lib/permissions.js');
 
     api.addFiles('helpers/generalHelpers.js', 'client');
     api.addFiles('helpers/listHelpers.js', 'client');
