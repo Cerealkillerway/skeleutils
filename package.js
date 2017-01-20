@@ -13,6 +13,7 @@ Package.describe({
 Package.onUse(function(api) {
     // packages
     api.use('jquery', 'client');
+    api.use('ecmascript');
     api.use('underscore@1.0.0');
     api.use('blaze-html-templates', 'client');
     api.use('tap:i18n@1.7.0');
