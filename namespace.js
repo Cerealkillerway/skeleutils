@@ -1,5 +1,6 @@
 skeleUtils = {
     globalUtilities: {},
     globalVariables: {},
-    globalHelpers: {}
+    globalHelpers: {},
+    globalEvents: {}
 };

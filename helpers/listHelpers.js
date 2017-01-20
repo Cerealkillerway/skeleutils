@@ -160,15 +160,23 @@ skeleUtils.globalHelpers.skelelistGeneralHelpers = {
 
             // applies field's listview options
             if (listOptions) {
+                // strip HTML
                 if (listOptions.stripHTML) {
                     value = value.replace(/<(?:.|\n)*?>/gm, '');
                 }
+
+                // handle truncation
                 if (listOptions.truncate) {
                     if (value.length > listOptions.truncate.max) {
                         let truncateSuffix = listOptions.truncate.suffix || '[...]';
 
                         value = value.substr(0, listOptions.truncate.max) + truncateSuffix;
                     }
+                }
+
+                // fire transformation callback
+                if (listOptions.transform) {
+                    value = listOptions.transform(value, data);
                 }
             }
 

@@ -39,6 +39,8 @@ Package.onUse(function(api) {
     api.addFiles('helpers/generalHelpers.js', 'client');
     api.addFiles('helpers/listHelpers.js', 'client');
 
+    api.addFiles('events/generalEvents.js', 'client');
+
 });
 
 Package.onTest(function(api) {

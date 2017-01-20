@@ -60,7 +60,7 @@ Template.registerHelper('skeleLangAttribute', function(data, attribute, lang) {
 
 // outputs a link with currentLang queryParam
 Template.registerHelper('skeleCurrentLangLink', function(link) {
-    let langQuery = '?lang=' + FlowRouter.getQueryParam('lang');
+    let langQuery = '?lang=' + TAPi18n.getLanguage();
 
     if (link) {
         return link + langQuery;
