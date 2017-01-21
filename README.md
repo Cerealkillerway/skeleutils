@@ -12,12 +12,12 @@ Inside a Skeletor app this package provides common utilities, prototypes and gen
 
 ### Logger
 
-**skeleUtils.globalUtilities.logger (message, type, force, stackTrace, customSeparator)**: can be used to send console logs, that will be displayed based on the value of the app's debug variable; paramters:
+**SkeleUtils.GlobalUtilities.logger (message, type, force, stackTrace, customSeparator)**: can be used to send console logs, that will be displayed based on the value of the app's debug variable; paramters:
 - **message**: *[any] (mandatory)* something to print in the console's log; if it's a string can contain `<separator>` pattern, that will be replaced with a line separator;
-- **type**: *[string] (optional)* a string defining the style of the log; it can be extended by adding custom css rules to the *skeleUtils.globalVariables.logTypes* object;
+- **type**: *[string] (optional)* a string defining the style of the log; it can be extended by adding custom css rules to the *SkeleUtils.GlobalVariables.logTypes* object;
 - **force**: *[boolean] (optional)* force the log to be displayed also if app's debug variable is *false* (default to *true*);
 - **stackTrace**: *[boolean] (optional)* display the stack trace together with the log (default to *false*);
-- **customSeparator**: *[string] (optional)* the separator to be used to replace `<separator>` string in the message; can be a property of the *skeleUtils.globalVariables.logSeparators* object or directly the string to use (default to *skeleUtils.globalVariables.logSeparators.default*);
+- **customSeparator**: *[string] (optional)* the separator to be used to replace `<separator>` string in the message; can be a property of the *SkeleUtils.GlobalVariables.logSeparators* object or directly the string to use (default to *SkeleUtils.GlobalVariables.logSeparators.default*);
 
 
 ### Strings

@@ -1,4 +1,4 @@
-skeleUtils.globalEvents.TooltipOnRendered = function(instance) {
+SkeleUtils.GlobalEvents.TooltipOnRendered = function(instance) {
     instance.autorun(function() {
         let currentLang = TAPi18n.getLanguage();
 
@@ -6,6 +6,6 @@ skeleUtils.globalEvents.TooltipOnRendered = function(instance) {
         instance.$('.tooltipped').tooltip({delay: 50});
     });
 };
-skeleUtils.globalEvents.TooltipOnDestroyed = function(instance) {
+SkeleUtils.GlobalEvents.TooltipOnDestroyed = function(instance) {
     instance.$('.tooltipped').tooltip('remove');
 };

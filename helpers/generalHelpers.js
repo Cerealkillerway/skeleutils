@@ -126,7 +126,7 @@ Template.registerHelper('isMe', function(username, options) {
 
 // check permissions
 Template.registerHelper('skeleCheckPermissions', function(permissionType, failCallback) {
-    let isAllowed = skeleUtils.globalUtilities.checkPermissions(permissionType);
+    let isAllowed = SkeleUtils.GlobalUtilities.checkPermissions(permissionType);
 
     return isAllowed;
 });

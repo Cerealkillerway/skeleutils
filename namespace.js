@@ -1,6 +1,7 @@
-skeleUtils = {
-    globalUtilities: {},
-    globalVariables: {},
-    globalHelpers: {},
-    globalEvents: {}
+SkeleUtils = {
+    GlobalUtilities: {},
+    GlobalVariables: {},
+    GlobalHelpers: {},
+    GlobalEvents: {},
+    Accounts: {}
 };

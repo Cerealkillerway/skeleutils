@@ -1,4 +1,4 @@
-skeleUtils.globalHelpers.skelelistGeneralHelpers = {
+SkeleUtils.GlobalHelpers.skelelistGeneralHelpers = {
     label: function(listField, options) {
         let name = listField.name;
         name = listField.name.substring(name.lastIndexOf('.') + 1, name.length);
