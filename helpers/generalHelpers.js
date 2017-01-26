@@ -25,10 +25,43 @@ Template.registerHelper('debug', function(context, options) {
 });
 
 // checks if two given values are equal
-Template.registerHelper('test', function(value1, value2) {
-    if (value1 === value2) {
-        return true;
+Template.registerHelper('test', function(value1, value2, operator) {
+    //console.log(value1);
+    //console.log(value2);
+    //console.log(operator);
+
+    switch (operator) {
+        case 'gt':
+        if (value1 > value2) {
+            return true;
+        }
+        break;
+
+        case 'gte':
+        if (value1 >= value2) {
+            return true;
+        }
+        break;
+
+        case 'lt':
+        if (value1 < value2) {
+            return true;
+        }
+        break;
+
+        case 'lte':
+        if (value1 <= value2) {
+            return true;
+        }
+        break;
+
+        // by default test if values are equal
+        default:
+        if (value1 === value2) {
+            return true;
+        }
     }
+
     return false;
 });
 
