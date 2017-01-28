@@ -21,22 +21,26 @@ SkeleUtils.GlobalHelpers.skelelistGeneralHelpers = {
         // recursive function to deeply traverse schema fields and group of fields
         // and get the current field' schema
         function fieldSchemaLookup(fields, name) {
-            let schemaFound;
+            let schemaFound = false;
 
-            _.find(fields, function(field) {
-                //console.log(field);
-                if (field.skeleformGroup) {
-                    let schema = fieldSchemaLookup(field.fields, name);
+            for (let i = 0; i < fields.length; i++) {
+                let field = fields[i];
 
-                    if (schema) {
-                        schemaFound = schema;
-                        return schema;
-                    }
+                // avoid useless loops
+                if (schemaFound !== false) {
+                    break;
                 }
 
-                schemaFound = field;
-                return field.name === name;
-            });
+                if (field.skeleformGroup) {
+                    schemaFound = fieldSchemaLookup(field.fields, name);
+                }
+                else {
+                    if (field.name === name) {
+                        schemaFound = field;
+                        break;
+                    }
+                }
+            }
 
             return schemaFound;
         }
@@ -70,7 +74,6 @@ SkeleUtils.GlobalHelpers.skelelistGeneralHelpers = {
                 pathShards.forEach(function(pathShard, index) {
                     value = value[pathShard];
                 });
-                //value = data[name];
             }
 
             // if the value is a data source -> find the source attribute
