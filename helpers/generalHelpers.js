@@ -157,6 +157,25 @@ Template.registerHelper('isMe', function(username, options) {
     else return false;
 });
 
+// check if currentUser is a SUPER user
+Template.registerHelper('isSuperUser', function() {
+    let userRoles;
+
+    userRoles = Skeletor.currentUserRoles.get();
+
+    if (userRoles) {
+        userRoles = userRoles.fetch();
+    }
+    else {
+        return false;
+    }
+
+    if (_.find(userRoles, function(role) { return role.name === 'SUPERUSER'; })) {
+        return true;
+    }
+    return false;
+});
+
 // check permissions
 Template.registerHelper('skeleCheckPermissions', function(permissionType, failCallback) {
     let isAllowed = SkeleUtils.GlobalUtilities.checkPermissions(permissionType);
