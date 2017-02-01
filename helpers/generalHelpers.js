@@ -67,7 +67,8 @@ Template.registerHelper('test', function(value1, value2, operator) {
 
 // outputs the currentLang session variable
 Template.registerHelper('currentLang', function() {
-    return FlowRouter.getParam('itemLang');
+    //return FlowRouter.getParam('itemLang');
+    return TAPi18n.getLanguage();
 });
 
 // get a lang nested attribute
