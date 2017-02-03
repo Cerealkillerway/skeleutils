@@ -1,8 +1,4 @@
 // General spacebar helpers
-
-// get global configuration object
-let configuration = Meteor.settings.public.configuration;
-
 // console log
 Template.registerHelper('skeleLog', function(context, options) {
     console.log(context);
@@ -105,7 +101,10 @@ Template.registerHelper('skeleCurrentLangLink', function(link) {
 // outputs attribute from configuration object
 Template.registerHelper('conf', function(context, options) {
     let pathShards = context.split('.');
-    let result = configuration;
+    let result = Skeletor.configuration;
+
+    // register dependency from configuration document
+    Skeletor.Registry.configurationChanged.get();
 
     pathShards.forEach(function(shard, index) {
         result = result[shard];
