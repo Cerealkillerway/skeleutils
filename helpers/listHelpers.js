@@ -59,6 +59,10 @@ SkeleUtils.GlobalHelpers.skelelistGeneralHelpers = {
             let pathShards = name.split('.');
             let fieldMissingTranslation = false;
 
+            if (name === '_id') {
+                fieldSchema = {i18n: false};
+            }
+
             if (fieldSchema.i18n === undefined) {
                 if (data[lang + '---' + name]) {
                     value = data[lang + '---' + name];
