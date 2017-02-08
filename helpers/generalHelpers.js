@@ -68,9 +68,11 @@ Template.registerHelper('currentLang', function() {
 });
 
 // get a lang nested attribute
+// IMPORTANT: when using this helper, you must supply 3 arguments (use false for the third argument)
+// if you want it to get the language from the app
 Template.registerHelper('skeleLangAttribute', function(data, attribute, lang) {
     if (!lang) {
-        lang  = FlowRouter.getParam('itemLang');
+        lang  = TAPi18n.getLanguage();
     }
 
     switch (lang) {
