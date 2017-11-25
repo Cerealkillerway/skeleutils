@@ -1,6 +1,6 @@
 Package.describe({
     name: 'cerealkiller:skeleutils',
-    version: '1.5.3',
+    version: '1.6.0',
     summary: 'utilities and common functions',
     // URL to the Git repository containing the source code for this package.
     git: '',
@@ -15,7 +15,7 @@ Package.onUse(function(api) {
     api.use([
         'jquery',
         'blaze-html-templates',
-        'fourseven:scss@3.2.0'
+        'fourseven:scss'
     ],
     ['client']);
 
