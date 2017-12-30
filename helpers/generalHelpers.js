@@ -51,6 +51,14 @@ Template.registerHelper('test', function(value1, value2, operator) {
         }
         break;
 
+        case 'and':
+        return value1 && value2;
+        break;
+
+        case 'or':
+        return value1 || value2;
+        break;
+
         // by default test if values are equal
         default:
         if (value1 === value2) {
