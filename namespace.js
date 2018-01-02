@@ -3,5 +3,6 @@ SkeleUtils = {
     GlobalVariables: {},
     GlobalHelpers: {},
     GlobalEvents: {},
+    ClientServerUtilities: {},
     Accounts: {}
 };

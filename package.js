@@ -38,7 +38,8 @@ Package.onUse(function(api) {
     ['client']);
     api.addFiles([
         'lib/permissions.js',
-        'lib/accounts.js'
+        'lib/accounts.js',
+        'lib/clientServerUtilities.js'
     ],
     ['client', 'server']);
 
