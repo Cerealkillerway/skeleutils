@@ -44,7 +44,7 @@ SkeleUtils.GlobalHelpers.skelelistGeneralHelpers = {
 
             return schemaFound;
         }
-
+        
         if (listTemplateinstance.skeleSubsReady.get()) {
             let name = listField.name;
             let fieldSchema = fieldSchemaLookup(schema.fields, name);
