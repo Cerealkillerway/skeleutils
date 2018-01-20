@@ -21,7 +21,7 @@ Template.registerHelper('debug', function(context, options) {
 });
 
 // checks if two given values are equal
-Template.registerHelper('test', function(value1, value2, operator) {
+Template.registerHelper('skeleformTest', function(value1, value2, operator) {
     //console.log(value1);
     //console.log(value2);
     //console.log(operator);
