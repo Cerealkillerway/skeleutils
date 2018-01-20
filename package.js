@@ -46,6 +46,7 @@ Package.onUse(function(api) {
     api.addFiles([
         'helpers/generalHelpers.js',
         'helpers/listHelpers.js',
+        'helpers/loadingHelpers.js',
         'events/generalEvents.js'
     ],
     ['client']);

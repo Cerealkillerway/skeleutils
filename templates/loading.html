@@ -3,7 +3,16 @@
     <div id="gearLoadingModal" class="modal">
         <div class="modal-content">
             <img src="/images/logos/miniLogo.png" height="100">
-            <div id="gear" style="height: 210px;">
+            {{> gearContent}}
+        </div>
+    </div>
+</template>
+
+
+<template name="gearContent">
+    {{#if displayLoading this}}
+        <div class="skeleformGearWrapper">
+            <div id="gear" style="height: 180px;">
                 <div class="gearContainer">
                     <div class="gearbox">
                         <div class="overlay"></div>
@@ -41,8 +50,7 @@
                     </div>
                 </div>
             </div>
-            <h3>{{_ "loading_msg"}}</h3>
-            <p>{{conf "name"}}</p>
+            <h5>{{_ "loading_msg"}}</h5>
         </div>
-    </div>
+    {{/if}}
 </template>
