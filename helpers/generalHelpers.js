@@ -14,11 +14,13 @@ Template.registerHelper('defaultLang', function() {
     return Skeletor.configuration.lang.default;
 });
 
+
 // check if debug is enable
 Template.registerHelper('debug', function(context, options) {
     if (Skeletor.configuration.debug) return true;
     return false;
 });
+
 
 // checks if two given values are equal
 Template.registerHelper('skeleformTest', function(value1, value2, operator) {
@@ -69,11 +71,13 @@ Template.registerHelper('skeleformTest', function(value1, value2, operator) {
     return false;
 });
 
+
 // outputs the currentLang session variable
 Template.registerHelper('currentLang', function() {
     //return FlowRouter.getParam('itemLang');
     return TAPi18n.getLanguage();
 });
+
 
 // get a lang nested attribute
 // IMPORTANT: when using this helper, you must supply 3 arguments (use false for the third argument)
@@ -102,6 +106,7 @@ Template.registerHelper('skeleLangAttribute', function(data, attribute, lang) {
     }
 });
 
+
 // outputs a link with currentLang queryParam
 Template.registerHelper('skeleCurrentLangLink', function(link) {
     let langQuery = '?lang=' + TAPi18n.getLanguage();
@@ -111,6 +116,7 @@ Template.registerHelper('skeleCurrentLangLink', function(link) {
     }
     return langQuery;
 });
+
 
 // outputs attribute from configuration object
 Template.registerHelper('conf', function(context, options) {
@@ -125,6 +131,7 @@ Template.registerHelper('conf', function(context, options) {
     });
     return result;
 });
+
 
 // outputs special variables
 Template.registerHelper('display', function(context, options) {
@@ -142,6 +149,7 @@ Template.registerHelper('display', function(context, options) {
 Template.registerHelper('stripHtml', function(context, truncate) {
     if (context) return context.replace(/<(?:.|\n)*?>/gm, '');
 });
+
 
 // remove HTML markup from lang dependant attribute
 Template.registerHelper('stripHtmlLang', function(context, attribute, truncate) {
@@ -163,6 +171,7 @@ Template.registerHelper('stripHtmlLang', function(context, attribute, truncate) 
     }
 });
 
+
 // check if supplied username belongs to current logged user
 Template.registerHelper('isMe', function(username, options) {
     if (username === Meteor.user().username) {
@@ -170,6 +179,7 @@ Template.registerHelper('isMe', function(username, options) {
     }
     else return false;
 });
+
 
 // check if currentUser is a SUPER user
 Template.registerHelper('isSuperUser', function() {
@@ -190,12 +200,14 @@ Template.registerHelper('isSuperUser', function() {
     return false;
 });
 
+
 // check permissions
 Template.registerHelper('skeleCheckPermissions', function(permissionType, failCallback) {
     let isAllowed = SkeleUtils.GlobalUtilities.checkPermissions(permissionType);
 
     return isAllowed;
 });
+
 
 // check if skeletor' subscriptions are Ready
 Template.registerHelper('skeleSubsReady', function(subscription) {
@@ -208,4 +220,10 @@ Template.registerHelper('skeleSubsReady', function(subscription) {
     else {
         return Template.instance().skeleSubsReady.get();
     }
+});
+
+
+// return a 1-based index from a 0-based index
+Template.registerHelper('humanReadableIndex', function(computerIndex) {
+    return computerIndex + 1;
 });
