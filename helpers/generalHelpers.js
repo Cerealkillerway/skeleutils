@@ -107,6 +107,27 @@ Template.registerHelper('skeleLangAttribute', function(data, attribute, lang) {
 });
 
 
+// check if data item(s) is(are) ready
+Template.registerHelper('isDataReady', function(context) {
+    if (context.skeleSubsReady.get() === false) {
+        return false;
+    }
+    return true;
+});
+
+
+// get a lang value from a data item
+Template.registerHelper('getCurrentLangData', function(data, fieldName) {
+    if (!data) {
+        return '';
+    }
+
+    let currentLang = FlowRouter.getParam('itemLang');
+
+    return data[currentLang + '---' + fieldName];
+});
+
+
 // outputs a link with currentLang queryParam
 Template.registerHelper('skeleCurrentLangLink', function(link) {
     let langQuery = '?lang=' + TAPi18n.getLanguage();
@@ -226,4 +247,38 @@ Template.registerHelper('skeleSubsReady', function(subscription) {
 // return a 1-based index from a 0-based index
 Template.registerHelper('humanReadableIndex', function(computerIndex) {
     return computerIndex + 1;
+});
+
+
+// Search for a field name in the collection's schema
+Template.registerHelper('getDocumentField', function(fieldName, schema, document) {
+    if (!schema || !document) return false;
+    let result;
+    let currentLang = TAPi18n.getLanguage();
+
+    function fieldSchemaLookup(schema, name) {
+        let schemaFound;
+
+        _.find(schema, function(field) {
+            if (field.skeleformGroup) {
+                let schema = fieldSchemaLookup(field.schema, name);
+                if (schema) {
+                    schemaFound = schema;
+                    return schema;
+                }
+            }
+            schemaFound = field;
+            return field.name === name;
+        });
+
+        return schemaFound;
+    }
+
+    fieldSchema = fieldSchemaLookup(schema, fieldName);
+    if (fieldSchema.i18n === false) {
+        result = document[fieldName];
+    }
+
+    result = document[currentLang + '---' + fieldName];
+    return result;
 });
