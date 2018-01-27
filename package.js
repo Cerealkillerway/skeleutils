@@ -32,10 +32,11 @@ Package.onUse(function(api) {
 
     // libraries
     api.addFiles([
-        'lib/commonUtilities.js',
+        'lib/globalUtilities.js',
         'lib/jquery.alterClass.js'
     ],
     ['client']);
+
     api.addFiles([
         'lib/permissions.js',
         'lib/accounts.js',

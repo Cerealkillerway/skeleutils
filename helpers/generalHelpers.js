@@ -224,7 +224,7 @@ Template.registerHelper('isSuperUser', function() {
 
 // check permissions
 Template.registerHelper('skeleCheckPermissions', function(permissionType, failCallback) {
-    let isAllowed = SkeleUtils.GlobalUtilities.checkPermissions(permissionType);
+    let isAllowed = SkeleUtils.Permissions.checkPermissions(permissionType);
 
     return isAllowed;
 });

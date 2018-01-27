@@ -4,5 +4,6 @@ SkeleUtils = {
     GlobalHelpers: {},
     GlobalEvents: {},
     ClientServerUtilities: {},
-    Accounts: {}
+    Accounts: {},
+    Permissions: {}
 };
