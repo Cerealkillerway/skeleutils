@@ -5,6 +5,8 @@
     /_______  /__|_ \\___  >____/\___  >____/ |__| |__|____/____  >
             \/     \/    \/          \/                         \/
 
+v2.0.67
+
 #### INTRO
 **Skeleutils** package is part of the **Skeletor** project and is not meant be used alone.
 
