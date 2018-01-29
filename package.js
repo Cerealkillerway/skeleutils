@@ -63,5 +63,5 @@ Package.onTest(function(api) {
         'cerealkiller:skeleutils'
     ]);
 
-    api.addFiles('SkeleUtils-tests.js');
+    api.addFiles('skeleutils-tests.js');
 });
