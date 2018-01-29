@@ -15,7 +15,7 @@ Package.onUse(function(api) {
     api.use([
         'jquery',
         'blaze-html-templates',
-        'fourseven:scss'
+        'fourseven:scss@4.5.4'
     ],
     ['client']);
 
