@@ -1,6 +1,6 @@
 Package.describe({
     name: 'cerealkiller:skeleutils',
-    version: '2.0.67',
+    version: '2.0.69',
     summary: 'Utilities and common functions for Skeletor',
     // URL to the Git repository containing the source code for this package.
     git: '',
@@ -11,7 +11,7 @@ Package.onUse(function(api) {
     // namespace
     api.addFiles(['namespace.js'], ['client', 'server']);
 
-    api.versionsFrom('METEOR@1.6.1')
+    api.versionsFrom('METEOR@1.6.1');
     // dependencies
     api.use([
         'jquery',

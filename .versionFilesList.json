@@ -1,6 +1,6 @@
 {
   "name": "cerealkiller:skeleutils",
-  "currentVersion": "2.0.67",
+  "currentVersion": "2.0.69",
   "versionPrefix": "v",
   "filesList": [
     "package.js:package",
