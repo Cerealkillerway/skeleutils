@@ -44,7 +44,7 @@ SkeleUtils.GlobalHelpers.skelelistGeneralHelpers = {
 
             return schemaFound;
         }
-        
+
         if (listTemplateinstance.skeleSubsReady.get()) {
             let name = listField.name;
             let fieldSchema = fieldSchemaLookup(schema.fields, name);
@@ -191,7 +191,12 @@ SkeleUtils.GlobalHelpers.skelelistGeneralHelpers = {
                 result.value = '#(' + value + ')';
             }
             else {
-                result.value = value;
+                if (value === '' || value === undefined) {
+                    result.value = TAPi18n.__('none_lbl');
+                }
+                else {
+                    result.value = value;
+                }
             }
             return result;
         }
