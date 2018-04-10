@@ -252,7 +252,10 @@ Template.registerHelper('humanReadableIndex', function(computerIndex) {
 
 // Search for a field name in the collection's schema
 Template.registerHelper('getDocumentField', function(fieldName, schema, document) {
-    if (!schema || !document) return false;
+    if (!schema || !document) {
+        return false;
+    }
+
     let result;
     let currentLang = TAPi18n.getLanguage();
 
