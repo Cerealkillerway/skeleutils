@@ -1,3 +1,6 @@
+import { FlowRouter } from 'meteor/ostrio:flow-router-extra';
+
+
 SkeleUtils.GlobalHelpers.skelelistGeneralHelpers = {
     label: function(listField, options) {
         let name = listField.name;

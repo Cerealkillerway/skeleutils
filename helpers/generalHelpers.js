@@ -1,3 +1,6 @@
+import { FlowRouter } from 'meteor/ostrio:flow-router-extra';
+
+
 // General spacebar helpers
 // console log
 Template.registerHelper('skeleLog', function(context, options) {
