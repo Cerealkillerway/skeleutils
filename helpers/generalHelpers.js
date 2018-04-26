@@ -17,6 +17,13 @@ Template.registerHelper('defaultLang', function() {
     return Skeletor.configuration.lang.default;
 });
 
+// check if data item(s) is(are) ready
+Template.registerHelper('skeleIsDataReady', function(context) {
+    if (context.skeleSubsReady.get() === false) {
+        return false;
+    }
+    return true;
+});
 
 // check if debug is enable
 Template.registerHelper('debug', function(context, options) {
@@ -107,15 +114,6 @@ Template.registerHelper('skeleLangAttribute', function(data, attribute, lang) {
         default:
         return data[lang + '---' + attribute];
     }
-});
-
-
-// check if data item(s) is(are) ready
-Template.registerHelper('isDataReady', function(context) {
-    if (context.skeleSubsReady.get() === false) {
-        return false;
-    }
-    return true;
 });
 
 
