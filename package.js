@@ -1,6 +1,6 @@
 Package.describe({
     name: 'cerealkiller:skeleutils',
-    version: '2.0.69',
+    version: '3.0.2',
     summary: 'Utilities and common functions for Skeletor',
     // URL to the Git repository containing the source code for this package.
     git: '',

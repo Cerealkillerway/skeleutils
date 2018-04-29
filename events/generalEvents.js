@@ -1,6 +1,6 @@
 SkeleUtils.GlobalEvents.TooltipOnRendered = function(instance) {
     instance.autorun(function() {
-        let currentLang = TAPi18n.getLanguage();
+        let currentLang = i18n.currentLocale.get();
 
         instance.$('.tooltipped').tooltip('remove');
         instance.$('.tooltipped').tooltip({delay: 50});

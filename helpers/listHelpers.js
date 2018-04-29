@@ -9,7 +9,7 @@ SkeleUtils.GlobalHelpers.skelelistGeneralHelpers = {
         switch(options) {
 
             default:
-            return TAPi18n.__(name + '_lbl');
+            return i18n.get(name + '_lbl');
         }
     },
     listRecord: function(listRecord, listSchema) {
@@ -130,7 +130,7 @@ SkeleUtils.GlobalHelpers.skelelistGeneralHelpers = {
                         }
                     }
                     else {
-                        value = TAPi18n.__('none_lbl');
+                        value = i18n.get('none_lbl');
                     }
                     mappedValue.push(value);
                 });
@@ -195,7 +195,7 @@ SkeleUtils.GlobalHelpers.skelelistGeneralHelpers = {
             }
             else {
                 if (value === '' || value === undefined) {
-                    result.value = TAPi18n.__('none_lbl');
+                    result.value = i18n.get('none_lbl');
                 }
                 else {
                     result.value = value;

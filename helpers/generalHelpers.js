@@ -85,7 +85,7 @@ Template.registerHelper('skeleformTest', function(value1, value2, operator) {
 // outputs the currentLang session variable
 Template.registerHelper('currentLang', function() {
     //return FlowRouter.getParam('itemLang');
-    return TAPi18n.getLanguage();
+    return i18n.currentLocale.get();
 });
 
 
@@ -98,7 +98,7 @@ Template.registerHelper('skeleLangAttribute', function(data, attribute, lang) {
     }
 
     if (!lang) {
-        lang  = TAPi18n.getLanguage();
+        lang  = i18n.currentLocale.get();
     }
 
     switch (lang) {
@@ -131,7 +131,7 @@ Template.registerHelper('getCurrentLangData', function(data, fieldName) {
 
 // outputs a link with currentLang queryParam
 Template.registerHelper('skeleCurrentLangLink', function(link) {
-    let langQuery = '?lang=' + TAPi18n.getLanguage();
+    let langQuery = '?lang=' + i18n.currentLocale.get();
 
     if (link) {
         return link + langQuery;
@@ -162,7 +162,7 @@ Template.registerHelper('display', function(context, options) {
             return moment().format('YYYY');
 
         case 'connectionStatus':
-            return TAPi18n.__(Meteor.status().status + '_lbl');
+            return i18n.get(Meteor.status().status + '_lbl');
     }
 });
 
@@ -188,7 +188,7 @@ Template.registerHelper('stripHtmlLang', function(context, attribute, truncate) 
     }
     else {
         if (attribute) {
-            return attribute + ' (' + TAPi18n.__('translationTitleNoHTML_missing').toUpperCase() + ')';
+            return attribute + ' (' + i18n.get('translationTitleNoHTML_missing').toUpperCase() + ')';
         }
     }
 });
@@ -258,7 +258,7 @@ Template.registerHelper('getDocumentField', function(fieldName, schema, document
     }
 
     let result;
-    let currentLang = TAPi18n.getLanguage();
+    let currentLang = i18n.currentLocale.get();
 
     function fieldSchemaLookup(schema, name) {
         let schemaFound;
