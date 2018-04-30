@@ -7,15 +7,24 @@ Template.registerHelper('skeleLog', function(context, options) {
     console.log(context);
 });
 
+
 // console trace
 Template.registerHelper('skeleTrace', function(context, options) {
     console.trace(context);
 });
 
+
 // outputs the defaultLang
 Template.registerHelper('defaultLang', function() {
     return Skeletor.configuration.lang.default;
 });
+
+
+// gets the prefix for static files
+Template.registerHelper('skeleStaticPath', function() {
+    return Skeletor.configuration.staticFilesPath;
+});
+
 
 // check if data item(s) is(are) ready
 Template.registerHelper('skeleIsDataReady', function(context) {
@@ -24,6 +33,7 @@ Template.registerHelper('skeleIsDataReady', function(context) {
     }
     return true;
 });
+
 
 // check if debug is enable
 Template.registerHelper('debug', function(context, options) {
