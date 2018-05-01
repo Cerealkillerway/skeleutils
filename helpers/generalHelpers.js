@@ -26,6 +26,30 @@ Template.registerHelper('skeleStaticPath', function() {
 });
 
 
+// gets a reactive var's value
+Template.registerHelper('skeleGetReactiveVar', function(variable) {
+    return variable.get();
+});
+
+
+// format dateStrings using moment.js
+Template.registerHelper('skeleFormatDate', function(options) {
+    let date;
+
+    if (options.hash.input) {
+        date = moment(options.hash.date, options.hash.input);
+    }
+    else {
+        date = moment(options.hash.date);
+    }
+
+    if (options.hash.output) {
+        return date.format(options.hash.output);
+    }
+    return date;
+});
+
+
 // check if data item(s) is(are) ready
 Template.registerHelper('skeleIsDataReady', function(context) {
     if (context.skeleSubsReady.get() === false) {

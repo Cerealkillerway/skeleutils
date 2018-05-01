@@ -12,6 +12,8 @@ SkeleUtils.GlobalHelpers.skelelistGeneralHelpers = {
             return i18n.get(name + '_lbl');
         }
     },
+
+
     listRecord: function(listRecord, listSchema) {
         // if necessary fire "beforeRendering" callback (defined on the current schema)
         if (listSchema.callbacks && listSchema.callbacks.beforeRendering) {
@@ -20,37 +22,12 @@ SkeleUtils.GlobalHelpers.skelelistGeneralHelpers = {
 
         return listRecord;
     },
+
+
     field: function(listField, data, schema, listTemplateinstance) {
-        // recursive function to deeply traverse schema fields and group of fields
-        // and get the current field' schema
-        function fieldSchemaLookup(fields, name) {
-            let schemaFound = false;
-
-            for (let i = 0; i < fields.length; i++) {
-                let field = fields[i];
-
-                // avoid useless loops
-                if (schemaFound !== false) {
-                    break;
-                }
-
-                if (field.skeleformGroup) {
-                    schemaFound = fieldSchemaLookup(field.fields, name);
-                }
-                else {
-                    if (field.name === name) {
-                        schemaFound = field;
-                        break;
-                    }
-                }
-            }
-
-            return schemaFound;
-        }
-
         if (listTemplateinstance.skeleSubsReady.get()) {
             let name = listField.name;
-            let fieldSchema = fieldSchemaLookup(schema.fields, name);
+            let fieldSchema = SkeleUtils.GlobalUtilities.fieldSchemaLookup(schema.fields, name);
             let lang = FlowRouter.getParam('itemLang');
             let defaultLang = Skeletor.configuration.lang.default;
             let UIlang = FlowRouter.getQueryParam('lang');
@@ -150,7 +127,9 @@ SkeleUtils.GlobalHelpers.skelelistGeneralHelpers = {
                         break;
 
                         default:
-                        if (fieldSchema.i18n === undefined) {
+                        let paramFieldSchema = SkeleUtils.GlobalUtilities.fieldSchemaLookup(schema.fields, param);
+
+                        if (paramFieldSchema.i18n === undefined) {
                             if (data[lang + '---' + param]) {
                                 params[param] = data[lang + '---' + param];
                             }
@@ -204,6 +183,24 @@ SkeleUtils.GlobalHelpers.skelelistGeneralHelpers = {
             return result;
         }
     },
+
+
+    isSorted: function(field) {
+        let sortOptions = Template.instance().data.schema.__listView.sort;
+
+        let sorted = _.find(sortOptions, function(sortValue, sortName) {
+            return sortName === field.name;
+        });
+
+        if (sorted === 1) {
+            return '<i class="material-icons">arrow_drop_down</i>'
+        }
+        if (sorted === -1) {
+            return '<i class="material-icons">arrow_drop_up</i>'
+        }
+    },
+
+
     paginate: function(data) {
         if (!data.list) {
             let schema = data.schema;
@@ -251,6 +248,8 @@ SkeleUtils.GlobalHelpers.skelelistGeneralHelpers = {
 
         return data.list;
     },
+
+
     isPaginated: function(data) {
         let options = data.schema.__listView.options;
 
@@ -259,6 +258,8 @@ SkeleUtils.GlobalHelpers.skelelistGeneralHelpers = {
         }
         return false;
     },
+
+
     isTranslatable: function() {
         if (FlowRouter.getParam('itemLang')) {
             return true;

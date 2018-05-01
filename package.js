@@ -22,7 +22,8 @@ Package.onUse(function(api) {
 
     api.use([
         'ecmascript',
-        'underscore@1.0.0'
+        'underscore@1.0.0',
+        'momentjs:moment'
     ], ['client', 'server']);
 
     // styles
