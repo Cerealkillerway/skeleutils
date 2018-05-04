@@ -15,6 +15,8 @@ SkeleUtils.GlobalHelpers.skelelistGeneralHelpers = {
 
 
     listRecord: function(listRecord, listSchema) {
+        listSchema = listSchema.get();
+
         // if necessary fire "beforeRendering" callback (defined on the current schema)
         if (listSchema.callbacks && listSchema.callbacks.beforeRendering) {
             listRecord = listSchema.callbacks.beforeRendering(listRecord);
@@ -33,7 +35,7 @@ SkeleUtils.GlobalHelpers.skelelistGeneralHelpers = {
             let UIlang = FlowRouter.getQueryParam('lang');
             let result = {};
             let value;
-            let listViewOptions = schema.__listView;
+            let listViewOptions = schema.listView.get();
             let listOptions = fieldSchema.__listView;
             let link = schema.__listView.detailLink;
             let pathShards = name.split('.');
@@ -251,7 +253,7 @@ SkeleUtils.GlobalHelpers.skelelistGeneralHelpers = {
 
 
     isPaginated: function(data) {
-        let options = data.schema.__listView.options;
+        let options = data.schema.listView.get().options;
 
         if  (options && options.pagination) {
             return true;

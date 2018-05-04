@@ -27,8 +27,14 @@ Template.registerHelper('skeleStaticPath', function() {
 
 
 // gets a reactive var's value
-Template.registerHelper('skeleGetReactiveVar', function(variable) {
-    return variable.get();
+Template.registerHelper('skeleGetReactiveVar', function(variable, options) {
+    let result = variable.get();
+
+    if (options.hash.property) {
+        return result[options.hash.property];
+    }
+
+    return result;
 });
 
 
