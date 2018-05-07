@@ -122,10 +122,17 @@ Template.registerHelper('skeleformTest', function(value1, value2, operator) {
 });
 
 
-// outputs the currentLang session variable
+// outputs the currentLang of the i18n package
 Template.registerHelper('currentLang', function() {
     //return FlowRouter.getParam('itemLang');
     return i18n.currentLocale.get();
+});
+
+
+// outputs the content lang from url
+Template.registerHelper('currentContentLang', function() {
+    //return FlowRouter.getParam('itemLang');
+    return FlowRouter.getParam('itemLang');
 });
 
 
