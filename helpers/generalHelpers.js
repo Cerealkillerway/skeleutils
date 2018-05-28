@@ -333,3 +333,16 @@ Template.registerHelper('getDocumentField', function(fieldName, schema, document
     result = document[currentLang + '---' + fieldName];
     return result;
 });
+
+
+Template.registerHelper('skeleLangsEnable', function() {
+    let enabledLangs = [];
+
+    _.each(Skeletor.configuration.langEnable, function(isEnabled, lang) {
+        if (isEnabled) {
+            enabledLangs.push(lang);
+        }
+    });
+
+    return enabledLangs;
+});
