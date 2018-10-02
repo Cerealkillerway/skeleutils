@@ -206,7 +206,7 @@ SkeleUtils.GlobalHelpers.skelelistGeneralHelpers = {
     paginate: function(data) {
         if (!data.list) {
             let schema = data.schema;
-            let listSchema = schema.__listView;
+            let listSchema = schema.listView.get();
             let options = listSchema.options;
             let sort = listSchema.sort;
             let collection = schema.__collection;
@@ -218,11 +218,9 @@ SkeleUtils.GlobalHelpers.skelelistGeneralHelpers = {
                 findOptions.sort = {};
 
                 _.keys(sort).forEach(function(sortOption, index) {
-                    let fieldSchema = $.grep(schema.fields, function(field){
-                        return field.name == sortOption;
-                    });
+                    let fieldSchema = SkeleUtils.GlobalUtilities.fieldSchemaLookup(schema.fields, sortOption);
 
-                    if (fieldSchema[0].i18n === undefined) {
+                    if (fieldSchema.i18n === undefined) {
                         findOptions.sort[FlowRouter.getParam('itemLang') + '---' + sortOption] = sort[sortOption];
                     }
                     else {
@@ -231,19 +229,7 @@ SkeleUtils.GlobalHelpers.skelelistGeneralHelpers = {
                 });
             }
 
-            // get paginated data
-            if (options && options.pagination) {
-                let currentPage = FlowRouter.getQueryParam('page');
-                let skip = parseInt(currentPage - 1) * options.itemsPerPage;
-
-                findOptions.limit = options.itemsPerPage;
-                findOptions.skip = skip;
-                list = Skeletor.Data[collection].find({}, findOptions);
-            }
-            // get all data
-            else {
-                list = Skeletor.Data[collection].find({}, findOptions);
-            }
+            list = Skeletor.Data[collection].find({}, findOptions);
 
             return list;
         }

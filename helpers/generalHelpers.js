@@ -307,25 +307,7 @@ Template.registerHelper('getDocumentField', function(fieldName, schema, document
     let result;
     let currentLang = i18n.currentLocale.get();
 
-    function fieldSchemaLookup(schema, name) {
-        let schemaFound;
-
-        _.find(schema, function(field) {
-            if (field.skeleformGroup) {
-                let schema = fieldSchemaLookup(field.schema, name);
-                if (schema) {
-                    schemaFound = schema;
-                    return schema;
-                }
-            }
-            schemaFound = field;
-            return field.name === name;
-        });
-
-        return schemaFound;
-    }
-
-    fieldSchema = fieldSchemaLookup(schema, fieldName);
+    fieldSchema = SkeleUtils.GlobalUtilities.fieldSchemaLookup(schema, fieldName);
     if (fieldSchema.i18n === false) {
         result = document[fieldName];
     }

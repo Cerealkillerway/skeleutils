@@ -14,7 +14,7 @@ Inside a Skeletor app this package provides common utilities, prototypes and gen
 
 ### Logger
 
-**SkeleUtils.GlobalUtilities.logger (message, type, force, stackTrace, customSeparator)**: can be used to send console logs, that will be displayed based on the value of the app's debug variable; paramters:
+**SkeleUtils.GlobalUtilities.logger (message, type, force, stackTrace, customSeparator)**: can be used to send console logs, that will be displayed based on the value of the app's debug variable; parameters:
 - **message**: *[any] (mandatory)* something to print in the console's log; if it's a string can contain `<separator>` pattern, that will be replaced with a line separator;
 - **type**: *[string] (optional)* a string defining the style of the log; it can be extended by adding custom css rules to the *SkeleUtils.GlobalVariables.logTypes* object;
 - **force**: *[boolean] (optional)* force the log to be displayed also if app's debug variable is *false* (default to *true*);
