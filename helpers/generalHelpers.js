@@ -30,7 +30,7 @@ Template.registerHelper('skeleStaticPath', function() {
 Template.registerHelper('skeleGetReactiveVar', function(variable, options) {
     let result = variable.get();
 
-    if (options.hash.property) {
+    if (options && options.hash.property) {
         return result[options.hash.property];
     }
 
