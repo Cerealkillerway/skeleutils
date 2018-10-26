@@ -14,12 +14,31 @@ SkeleUtils.GlobalHelpers.skelelistGeneralHelpers = {
     },
 
 
-    listRecord: function(listRecord, listSchema) {
+    listRecord: function(listRecord, listSchema, schema) {
         listSchema = listSchema.get();
 
         // if necessary fire "beforeRendering" callback (defined on the current schema)
         if (listSchema.callbacks && listSchema.callbacks.beforeRendering) {
             listRecord = listSchema.callbacks.beforeRendering(listRecord);
+        }
+
+        for (itemField of listSchema.itemFields) {
+            // avoid displaying documents loaded by other parts of application
+            // that doesn't have the needed fields
+            let fieldSchema = SkeleUtils.GlobalUtilities.fieldSchemaLookup(schema.fields, itemField.name);
+            let fieldName = itemField.name;
+
+            if (fieldSchema.i18n === undefined || fieldSchema.i18n === true) {
+                let currentLang = FlowRouter.getParam('itemLang');
+
+                fieldName = currentLang + '---' + fieldName;
+            }
+
+            if (listRecord[fieldName] === undefined && !itemField.allowUndefined) {
+                console.log('wasted');
+                console.log(fieldName);
+                return false
+            }
         }
 
         return listRecord;
@@ -203,38 +222,34 @@ SkeleUtils.GlobalHelpers.skelelistGeneralHelpers = {
     },
 
 
-    paginate: function(data) {
-        if (!data.list) {
-            let schema = data.schema;
-            let listSchema = schema.listView.get();
-            let options = listSchema.options;
-            let sort = listSchema.sort;
-            let collection = schema.__collection;
-            let findOptions = {};
-            let list;
+    getDocumentsList: function(data) {
+        let schema = data.schema;
+        let listSchema = schema.listView.get();
+        let options = listSchema.options;
+        let sort = listSchema.sort;
+        let collection = schema.__collection;
+        let findOptions = {};
+        let list;
 
-            // build sort object managing lang dependant attributes
-            if (sort) {
-                findOptions.sort = {};
+        // build sort object managing lang dependant attributes
+        if (sort) {
+            findOptions.sort = {};
 
-                _.keys(sort).forEach(function(sortOption, index) {
-                    let fieldSchema = SkeleUtils.GlobalUtilities.fieldSchemaLookup(schema.fields, sortOption);
+            _.keys(sort).forEach(function(sortOption, index) {
+                let fieldSchema = SkeleUtils.GlobalUtilities.fieldSchemaLookup(schema.fields, sortOption);
 
-                    if (fieldSchema.i18n === undefined) {
-                        findOptions.sort[FlowRouter.getParam('itemLang') + '---' + sortOption] = sort[sortOption];
-                    }
-                    else {
-                        findOptions.sort[sortOption] = sort[sortOption];
-                    }
-                });
-            }
-
-            list = Skeletor.Data[collection].find({}, findOptions);
-
-            return list;
+                if (fieldSchema.i18n === undefined) {
+                    findOptions.sort[FlowRouter.getParam('itemLang') + '---' + sortOption] = sort[sortOption];
+                }
+                else {
+                    findOptions.sort[sortOption] = sort[sortOption];
+                }
+            });
         }
 
-        return data.list;
+        list = Skeletor.Data[collection].find({}, findOptions);
+
+        return list;
     },
 
 

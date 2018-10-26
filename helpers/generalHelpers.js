@@ -61,6 +61,7 @@ Template.registerHelper('skeleIsDataReady', function(context) {
     if (context.skeleSubsReady.get() === false) {
         return false;
     }
+
     return true;
 });
 
@@ -69,6 +70,11 @@ Template.registerHelper('skeleIsDataReady', function(context) {
 Template.registerHelper('debug', function(context, options) {
     if (Skeletor.configuration.debug) return true;
     return false;
+});
+
+
+Template.registerHelper('skeleNot', function(value) {
+    return !value;
 });
 
 
