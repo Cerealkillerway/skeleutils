@@ -34,9 +34,14 @@ SkeleUtils.GlobalHelpers.skelelistGeneralHelpers = {
                 fieldName = currentLang + '---' + fieldName;
             }
 
-            if (listRecord[fieldName] === undefined && !itemField.allowUndefined) {
-                console.log('wasted');
-                console.log(fieldName);
+            let fieldValue = listRecord;
+
+            for (fieldNameShard of fieldName.split('.')) {
+                fieldValue = fieldValue[fieldNameShard];
+            }
+
+            if (fieldValue === undefined && !itemField.allowUndefined) {
+                SkeleUtils.GlobalUtilities.logger(`record removed from list beacuse of undefined value in ${fieldName}`, 'SkeleUtils');
                 return false
             }
         }
