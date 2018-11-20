@@ -23,7 +23,8 @@ Package.onUse(function(api) {
     api.use([
         'ecmascript',
         'underscore@1.0.0',
-        'momentjs:moment'
+        'momentjs:moment',
+        'ros:publish-counts@0.4.0'
     ], ['client', 'server']);
 
     // styles

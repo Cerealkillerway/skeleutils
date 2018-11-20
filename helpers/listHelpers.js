@@ -1,4 +1,5 @@
 import { FlowRouter } from 'meteor/ostrio:flow-router-extra';
+import { Counts } from 'meteor/ros:publish-counts';
 
 
 SkeleUtils.GlobalHelpers.skelelistGeneralHelpers = {
@@ -218,10 +219,10 @@ SkeleUtils.GlobalHelpers.skelelistGeneralHelpers = {
             return sortName === field.name;
         });
 
-        if (sorted === 1) {
+        if (sorted && sorted.direction === 1) {
             return '<i class="material-icons">arrow_drop_down</i>'
         }
-        if (sorted === -1) {
+        if (sorted && sorted.direction === -1) {
             return '<i class="material-icons">arrow_drop_up</i>'
         }
     },
@@ -242,13 +243,20 @@ SkeleUtils.GlobalHelpers.skelelistGeneralHelpers = {
 
             _.keys(sort).forEach(function(sortOption, index) {
                 let fieldSchema = SkeleUtils.GlobalUtilities.fieldSchemaLookup(schema.fields, sortOption);
+                let sortOptionName;
 
                 if (fieldSchema.i18n === undefined) {
-                    findOptions.sort[FlowRouter.getParam('itemLang') + '---' + sortOption] = sort[sortOption];
+                    sortOptionName = FlowRouter.getParam('itemLang') + '---' + sortOption;
                 }
                 else {
-                    findOptions.sort[sortOption] = sort[sortOption];
+                    sortOptionName = sortOption;
                 }
+
+                if (sort[sortOption].caseInsensitive) {
+                    sortOptionName = Skeletor.configuration.sort.caseInsensitivePrefix + sortOptionName;
+                }
+
+                findOptions.sort[sortOptionName] = sort[sortOption].direction;
             });
         }
 
@@ -273,5 +281,16 @@ SkeleUtils.GlobalHelpers.skelelistGeneralHelpers = {
             return true;
         }
         return false;
+    },
+
+    documentsCounter: function() {
+        if (!Counts) {
+            return false;
+        }
+
+        let schema = Template.instance().data.schema;
+        let collection = schema.__collection;
+
+        return Counts.get(`${collection}Counter`);
     }
 };
