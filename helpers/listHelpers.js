@@ -174,6 +174,8 @@ SkeleUtils.GlobalHelpers.skelelistGeneralHelpers = {
                 result.link = FlowRouter.path(link.basePath, params, {lang: UIlang, sLang: segmentLang});
             }
 
+            let emptyString = 'none_lbl';
+
             // applies field's listview options
             if (listOptions) {
                 // strip HTML
@@ -194,6 +196,11 @@ SkeleUtils.GlobalHelpers.skelelistGeneralHelpers = {
                 if (listOptions.transform) {
                     value = listOptions.transform(value, data);
                 }
+
+                // custom none string
+                if (listOptions.customEmptyString) {
+                    emptyString = listOptions.customEmptyString;
+                }
             }
 
             if (fieldMissingTranslation) {
@@ -201,7 +208,7 @@ SkeleUtils.GlobalHelpers.skelelistGeneralHelpers = {
             }
             else {
                 if (value === '' || value === undefined) {
-                    result.value = i18n.get('none_lbl');
+                    result.value = i18n.get(emptyString);
                 }
                 else {
                     result.value = value;
