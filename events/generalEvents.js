@@ -6,6 +6,8 @@ SkeleUtils.GlobalEvents.TooltipOnRendered = function(instance) {
         instance.$('.tooltipped').tooltip({delay: 50});
     });
 };
+
+
 SkeleUtils.GlobalEvents.TooltipOnDestroyed = function(instance) {
     instance.$('.tooltipped').tooltip('remove');
 };
