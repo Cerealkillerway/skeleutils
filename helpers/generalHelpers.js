@@ -131,7 +131,7 @@ Template.registerHelper('skeleformTest', function(value1, value2, operator) {
 // outputs the currentLang of the i18n package
 Template.registerHelper('currentLang', function() {
     //return FlowRouter.getParam('itemLang');
-    return i18n.currentLocale.get();
+    return Skeletor.Skelelang.i18n.currentLocale.get();
 });
 
 
@@ -151,7 +151,7 @@ Template.registerHelper('skeleLangAttribute', function(data, attribute, lang) {
     }
 
     if (!lang) {
-        lang  = i18n.currentLocale.get();
+        lang  = Skeletor.Skelelang.i18n.currentLocale.get();
     }
 
     switch (lang) {
@@ -184,7 +184,7 @@ Template.registerHelper('getCurrentLangData', function(data, fieldName) {
 
 // outputs a link with currentLang queryParam
 Template.registerHelper('skeleCurrentLangLink', function(link) {
-    let langQuery = '?lang=' + i18n.currentLocale.get();
+    let langQuery = '?lang=' + Skeletor.Skelelang.i18n.currentLocale.get();
 
     if (link) {
         return link + langQuery;
@@ -215,7 +215,7 @@ Template.registerHelper('display', function(context, options) {
             return moment().format('YYYY');
 
         case 'connectionStatus':
-            return i18n.get(Meteor.status().status + '_lbl');
+            return Skeletor.Skelelang.i18n.get(Meteor.status().status + '_lbl');
     }
 });
 
@@ -241,7 +241,7 @@ Template.registerHelper('stripHtmlLang', function(context, attribute, truncate) 
     }
     else {
         if (attribute) {
-            return attribute + ' (' + i18n.get('translationTitleNoHTML_missing').toUpperCase() + ')';
+            return attribute + ' (' + Skeletor.Skelelang.i18n.get('translationTitleNoHTML_missing').toUpperCase() + ')';
         }
     }
 });
@@ -311,7 +311,7 @@ Template.registerHelper('getDocumentField', function(fieldName, schema, document
     }
 
     let result;
-    let currentLang = i18n.currentLocale.get();
+    let currentLang = Skeletor.Skelelang.i18n.currentLocale.get();
 
     fieldSchema = SkeleUtils.GlobalUtilities.fieldSchemaLookup(schema, fieldName);
     if (fieldSchema.i18n === false) {

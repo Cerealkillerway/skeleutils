@@ -10,7 +10,7 @@ SkeleUtils.GlobalHelpers.skelelistGeneralHelpers = {
         switch(options) {
 
             default:
-            return i18n.get(name + '_lbl');
+            return Skeletor.Skelelang.i18n.get(name + '_lbl');
         }
     },
 
@@ -134,7 +134,7 @@ SkeleUtils.GlobalHelpers.skelelistGeneralHelpers = {
                         }
                     }
                     else {
-                        value = i18n.get('none_lbl');
+                        value = Skeletor.Skelelang.i18n.get('none_lbl');
                     }
                     mappedValue.push(value);
                 });
@@ -208,7 +208,7 @@ SkeleUtils.GlobalHelpers.skelelistGeneralHelpers = {
             }
             else {
                 if (value === '' || value === undefined) {
-                    result.value = i18n.get(emptyString);
+                    result.value = Skeletor.Skelelang.i18n.get(emptyString);
                 }
                 else {
                     result.value = value;
