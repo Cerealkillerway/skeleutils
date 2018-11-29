@@ -90,6 +90,9 @@ SkeleUtils.GlobalHelpers.skelelistGeneralHelpers = {
             // if the value is a data source -> find the source attribute
             if (listViewOptions.sourcedFields && listViewOptions.sourcedFields[name] !== undefined) {
                 let sourceOptions = listViewOptions.sourcedFields[name];
+                let sourceSchema = Skeletor.Schemas[sourceOptions.schemaName];
+                let sourceCollection = sourceSchema.__collection;
+                let sourceFieldSchema = SkeleUtils.GlobalUtilities.fieldSchemaLookup(sourceSchema.fields, sourceOptions.mapTo);
                 let values;
                 let mappedValue = [];
 
@@ -103,21 +106,20 @@ SkeleUtils.GlobalHelpers.skelelistGeneralHelpers = {
                 }
 
                 values.forEach(function(value) {
-                    let sourceDocument = Skeletor.Data[sourceOptions.collection].findOne({_id: value});
+                    let sourceDocument = Skeletor.Data[sourceCollection].findOne({_id: value});
 
                     if (sourceDocument) {
                         let nameAttr = sourceDocument;
                         let missingTranslation = false;
+                        let nameShards = sourceOptions.mapTo.split('.');
 
-                        sourceOptions.mapTo.split('.').forEach(function(nameShard, index) {
-                            if (nameShard.indexOf(':itemLang---') === 0) {
-                                let nameOnly = nameShard.substring(12, nameShard.length);
-
-                                if (nameAttr[lang + '---' + nameOnly]) {
-                                    nameAttr = nameAttr[lang + '---' + nameOnly];
+                        nameShards.forEach(function(nameShard, index) {
+                            if ((index === nameShards.length -1) && (sourceFieldSchema.i18n === true || sourceFieldSchema.i18n === undefined)) {
+                                if (nameAttr[`${lang}---${sourceOptions.mapTo}`]) {
+                                    nameAttr = nameAttr[`${lang}---${sourceOptions.mapTo}`];
                                 }
                                 else {
-                                    nameAttr = nameAttr[defaultLang + '---' + nameOnly];
+                                    nameAttr = nameAttr[`${defaultLang}---${sourceOptions.mapTo}`]
                                     missingTranslation = true;
                                 }
                             }
