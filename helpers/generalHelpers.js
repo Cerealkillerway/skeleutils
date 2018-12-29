@@ -57,7 +57,14 @@ Template.registerHelper('skeleFormatDate', function(options) {
 
 
 // check if data item(s) is(are) ready
-Template.registerHelper('skeleIsDataReady', function(context) {
+Template.registerHelper('skeleIsDataReady', function(context, singleCall) {
+    if (singleCall) {
+        if (context.alreadyCalled === true) {
+            return true;
+        }
+        context.alreadyCalled = true;
+    }
+
     if (context.skeleSubsReady.get() === false) {
         return false;
     }

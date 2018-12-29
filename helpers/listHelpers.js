@@ -114,6 +114,7 @@ SkeleUtils.GlobalHelpers.skelelistGeneralHelpers = {
                         let nameShards = sourceOptions.mapTo.split('.');
 
                         nameShards.forEach(function(nameShard, index) {
+                            // if a nested field is i18n, that means that only the last shard should be prefixed with "lang---"
                             if ((index === nameShards.length -1) && (sourceFieldSchema.i18n === true || sourceFieldSchema.i18n === undefined)) {
                                 if (nameAttr[`${lang}---${sourceOptions.mapTo}`]) {
                                     nameAttr = nameAttr[`${lang}---${sourceOptions.mapTo}`];
