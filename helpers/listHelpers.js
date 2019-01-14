@@ -246,6 +246,8 @@ SkeleUtils.GlobalHelpers.skelelistGeneralHelpers = {
         let collection = schema.__collection;
         let findOptions = {};
         let list;
+        let instance = Template.instance();
+        let listQuery = instance.data.listQuery.get() || {};
 
         // build sort object managing lang dependant attributes
         if (sort) {
@@ -270,7 +272,7 @@ SkeleUtils.GlobalHelpers.skelelistGeneralHelpers = {
             });
         }
 
-        list = Skeletor.Data[collection].find({}, findOptions);
+        list = Skeletor.Data[collection].find(listQuery, findOptions);
 
         return list;
     },
