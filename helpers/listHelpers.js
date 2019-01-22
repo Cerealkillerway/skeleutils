@@ -5,10 +5,10 @@ import { Counts } from 'meteor/ros:publish-counts';
 SkeleUtils.GlobalHelpers.skelelistGeneralHelpers = {
     label: function(listField, options) {
         let name = listField.name;
+
         name = listField.name.substring(name.lastIndexOf('.') + 1, name.length);
 
         switch(options) {
-
             default:
             return Skeletor.Skelelang.i18n.get(name + '_lbl');
         }
