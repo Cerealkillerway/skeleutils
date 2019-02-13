@@ -272,7 +272,9 @@ SkeleUtils.GlobalHelpers.skelelistGeneralHelpers = {
             });
         }
 
+        console.log(findOptions);
         list = Skeletor.Data[collection].find(listQuery, findOptions);
+        console.log(list.fetch());
 
         return list;
     },
