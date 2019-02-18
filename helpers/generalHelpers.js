@@ -341,3 +341,8 @@ Template.registerHelper('skeleLangsEnable', function() {
 
     return enabledLangs;
 });
+
+
+Template.registerHelper('skeleGetInstance', function() {
+    return Template.instance();
+});

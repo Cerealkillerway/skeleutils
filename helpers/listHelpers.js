@@ -16,6 +16,7 @@ SkeleUtils.GlobalHelpers.skelelistGeneralHelpers = {
 
 
     listRecord: function(listRecord, listSchema, schema) {
+        //console.log(listRecord);
         listSchema = listSchema.get();
 
         // if necessary fire "beforeRendering" callback (defined on the current schema)
@@ -272,11 +273,7 @@ SkeleUtils.GlobalHelpers.skelelistGeneralHelpers = {
             });
         }
 
-        console.log(findOptions);
-        list = Skeletor.Data[collection].find(listQuery, findOptions);
-        console.log(list.fetch());
-
-        return list;
+        return Skeletor.Data[collection].find(listQuery, findOptions);
     },
 
 
