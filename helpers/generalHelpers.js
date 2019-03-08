@@ -124,6 +124,10 @@ Template.registerHelper('skeleformTest', function(value1, value2, operator) {
         return value1 || value2;
         break;
 
+        case 'neq':
+        return value1 !== value2;
+        break;
+
         // by default test if values are equal
         default:
         if (value1 === value2) {
