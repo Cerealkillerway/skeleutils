@@ -11,7 +11,7 @@ Package.onUse(function(api) {
     // namespace
     api.addFiles(['namespace.js'], ['client', 'server']);
 
-    api.versionsFrom('METEOR@1.6.1');
+    api.versionsFrom('METEOR@1.8.0.2');
     // dependencies
     api.use([
         'jquery',

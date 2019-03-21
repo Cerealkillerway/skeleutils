@@ -21,7 +21,11 @@ Template.registerHelper('defaultLang', function() {
 
 
 // gets the prefix for static files
-Template.registerHelper('skeleStaticPath', function() {
+Template.registerHelper('skeleStaticPath', function(packageName, authorName) {
+    if (packageName) {
+        return `/packages/${authorName}_${packageName}`;
+    }
+
     return Skeletor.configuration.staticFilesPath;
 });
 
