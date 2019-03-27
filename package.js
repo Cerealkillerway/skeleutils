@@ -1,7 +1,7 @@
 Package.describe({
     name: 'cerealkiller:skeleutils',
-    version: '4.2.75',
-    summary: 'Utilities and common functions for Skeletor',
+    version: '5.0.0',
+    summary: 'utilities and common functions for skeletor',
     // URL to the Git repository containing the source code for this package.
     git: '',
     documentation: 'README.md'
@@ -9,9 +9,15 @@ Package.describe({
 
 Package.onUse(function(api) {
     // namespace
-    api.addFiles(['namespace.js'], ['client', 'server']);
+    api.addFiles([
+        'namespace.js'
+    ],
+    ['client', 'server']);
+
 
     api.versionsFrom('METEOR@1.8.0.2');
+
+
     // dependencies
     api.use([
         'jquery',
@@ -20,39 +26,52 @@ Package.onUse(function(api) {
     ],
     ['client']);
 
+
     api.use([
         'ecmascript',
         'underscore@1.0.0',
         'momentjs:moment',
         'ros:publish-counts@0.4.0'
-    ], ['client', 'server']);
+    ],
+    ['client', 'server']);
+
 
     // styles
-    api.addFiles(['styles/loading.scss'], ['client']);
+    api.addFiles([
+        'styles/loading.scss'
+    ],
+    ['client']);
+
 
     // templates
-    api.addFiles(['templates/loading.html'], ['client']);
+    api.addFiles([
+        'templates/loading.html'
+    ],
+    ['client']);
+
 
     // libraries
     api.addFiles([
-        'lib/globalUtilities.js',
-        'lib/jquery.alterClass.js'
+        'lib/global-utilities.js',
+        'lib/jquery.alter-class.js'
     ],
     ['client']);
+
 
     api.addFiles([
         'lib/permissions.js',
         'lib/accounts.js',
-        'lib/clientServerUtilities.js'
+        'lib/client-server-utilities.js'
     ],
     ['client', 'server']);
 
+
     api.addFiles([
-        'helpers/generalHelpers.js',
-        'helpers/listHelpers.js',
-        'helpers/toolbarsHelpers.js',
-        'helpers/loadingHelpers.js',
-        'events/generalEvents.js'
+        'helpers/general-helpers.js',
+        'helpers/list-helpers.js',
+        'helpers/toolbars-helpers.js',
+        'helpers/loading-helpers.js',
+        'events/general-events.js'
     ],
     ['client']);
 
@@ -60,6 +79,7 @@ Package.onUse(function(api) {
     // exports
     api.export(['SkeleUtils']);
 });
+
 
 Package.onTest(function(api) {
     api.use([
