@@ -16,7 +16,6 @@ SkeleUtils.GlobalHelpers.skelelistGeneralHelpers = {
 
 
     listRecord: function(listRecord, listSchema, schema) {
-        //console.log(listRecord);
         listSchema = listSchema.get();
 
         // if necessary fire "beforeRendering" callback (defined on the current schema)
@@ -265,9 +264,9 @@ SkeleUtils.GlobalHelpers.skelelistGeneralHelpers = {
                     sortOptionName = sortOption;
                 }
 
-                if (sort[sortOption].caseInsensitive) {
+                /*if (sort[sortOption].caseInsensitive) {
                     sortOptionName = Skeletor.configuration.sort.caseInsensitivePrefix + sortOptionName;
-                }
+                }*/
 
                 findOptions.sort[sortOptionName] = sort[sortOption].direction;
             });
