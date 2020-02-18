@@ -1,13 +1,28 @@
+import 'materialize-css'
+
 SkeleUtils.GlobalEvents.TooltipOnRendered = function(instance) {
     instance.autorun(function() {
-        let currentLang = Skeletor.Skelelang.i18n.currentLocale.get();
+        // register dependency from currentLang
+        let currentLang = Skeletor.Skelelang.i18n.currentLocale.get()
 
-        instance.$('.tooltipped').tooltip('remove');
-        instance.$('.tooltipped').tooltip({delay: 50});
-    });
-};
+        let elements = document.querySelectorAll('.tooltipped')
+        for (const element of elements) {
+            const instance = M.Tooltip.getInstance(element)
+            if (instance) {
+                instance.destroy()
+            }
+        }
+        M.Tooltip.init(elements, { delay: 50 })
+    })
+}
 
 
 SkeleUtils.GlobalEvents.TooltipOnDestroyed = function(instance) {
-    instance.$('.tooltipped').tooltip('remove');
-};
+    const elements = document.querySelectorAll('.tooltipped')
+    for (const element of elements) {
+        const instance = M.Tooltip.getInstance(element)
+        if (instance) {
+            instance.destroy()
+        }
+    }
+}
